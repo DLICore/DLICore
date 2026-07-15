@@ -1,0 +1,35 @@
+# Build outputs
+build/
+.gradle/
+out/
+*.jar
+!src/main/resources/*.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Runtime
+run/
+
+# Texture generation script
+__pycache__/
+*.pyc
+
+# Local config overrides
+local.properties
+gradle.properties.local

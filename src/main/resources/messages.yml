@@ -1,0 +1,58 @@
+# DLIAssets - Messages Configuration
+# Supports MiniMessage format (<red>, <gradient:#ff0000:#00ff00>, <bold>, etc.)
+
+messages:
+  # General
+  prefix: "<gradient:#ff0000:#ff8800>[DLIAssets]</gradient> "
+  no-permission: "<red>You don't have permission to do that."
+  player-only: "<red>This command can only be run by a player."
+  player-not-found: "<red>Player '<white>%player%</white>' not found."
+  item-not-found: "<red>Custom item '<white>%item%</white>' not found."
+  block-not-found: "<red>Custom block '<white>%block%</white>' not found."
+  mob-not-found: "<red>Custom mob '<white>%mob%</white>' not found."
+  invalid-amount: "<red>Invalid amount. Must be a number between 1 and 64."
+  reloaded: "<green>DLIAssets configuration reloaded successfully!"
+  pack-regenerating: "<yellow>Regenerating resource pack..."
+  pack-regenerated: "<green>Resource pack regenerated! (<white>%size%</white>)"
+  pack-failed: "<red>Failed to generate resource pack: <white>%error%</white>"
+  pack-updated: "<aqua>Resource pack updated. Please reload your resource pack (F3+T)."
+  
+  # Give Command
+  give-success: "<green>Gave <white>%amount%</white>x <gold>%item%</gold> to <white>%player%</white>."
+  give-success-self: "<green>You received <white>%amount%</white>x <gold>%item%</gold>."
+  give-failed-inventory-full: "<red>Inventory full! Could not give all items."
+  
+  # Resource Pack Prompt (Auto-download)
+  pack-prompt-title: "<gradient:#ff0000:#ff8800>DLI Assets Required</gradient>"
+  pack-prompt-message: |
+    <gray>This server requires the <gold>DLI Assets</gold> resource pack to play.
+    <gray>It contains custom items, blocks, and mobs.
+    
+    <yellow>Click <green>Yes</green> <yellow>to download and join.</yellow>
+  pack-prompt-timeout: "<red>Resource pack download timed out. Please try again."
+  pack-prompt-declined: "<red>You declined the resource pack. You cannot join without it."
+  pack-download-failed: "<red>Failed to download resource pack. Contact an admin."
+  
+  # GUI
+  gui-back: "<red>Back"
+  gui-next-page: "<gray>Next Page"
+  gui-prev-page: "<gray>Previous Page"
+  gui-close: "<red>Close"
+  gui-page-indicator: "<gray>Page <white>%current%</white>/<white>%total%</white>"
+  
+  # Admin
+  admin-reload-start: "<yellow>Reloading DLIAssets..."
+  admin-pack-gen-start: "<yellow>Generating resource pack..."
+  admin-spawn-success: "<green>Spawned <gold>%mob%</gold> at your location."
+  
+  # Debug
+  debug-item-info: |
+    <gold>=== Item Debug Info ===
+    <white>ID: <aqua>%id%</aqua>
+    <white>Material: <aqua>%material%</aqua>
+    <white>CMD: <aqua>%cmd%</aqua>
+    <white>Display: <aqua>%display%</aqua>
+
+  # Errors
+  error-generic: "<red>An error occurred: <white>%error%</white>"
+  error-config-load: "<red>Failed to load config: <white>%file%</white>"

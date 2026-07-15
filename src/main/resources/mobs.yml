@@ -1,0 +1,204 @@
+# DLIAssets - Mobs / Entities Configuration
+# Uses Paper's EntityType registration & Model Engine / Resource Pack for models
+# Base entities: ZOMBIE, SKELETON, CREEPER, ARMOR_STAND, ITEM_DISPLAY, BLOCK_DISPLAY, etc.
+
+mobs:
+  # ==========================
+  # CUSTOM BOSS: RUBY GOLEM
+  # ==========================
+  ruby_golem:
+    displayname: "<bold><gradient:#ff0000:#aa0000>Ruby Golem</gradient></bold>"
+    # Base entity type (handles AI, hitbox, movement)
+    # IRON_GOLEM is perfect for a neutral/hostile large mob
+    base-entity: IRON_GOLEM
+    
+    # Model (Resource Pack / Model Engine)
+    model:
+      # Custom Model Data for the entity model (requires resource pack entity model)
+      custom-model-data: 2001
+      # Scale (1.0 = normal)
+      scale: 1.2
+      # Texture file in assets/minecraft/textures/entity/dliassets/
+      texture: "entity/dliassets/ruby_golem.png"
+      # If using Model Engine / Geo models:
+      # model-engine-id: "ruby_golem_geo"
+    
+    # Attributes (Overrides base entity attributes)
+    attributes:
+      max-health: 300.0
+      movement-speed: 0.25
+      knockback-resistance: 1.0
+      attack-damage: 18.0
+      follow-range: 40.0
+      armor: 10.0
+      armor-toughness: 2.0
+    
+    # Equipment (Hand, Armor)
+    equipment:
+      main-hand:
+        item: "dliassets:ruby_sword"
+        drop-chance: 0.05
+      off-hand:
+        item: "minecraft:shield"
+        drop-chance: 0.0
+      helmet:
+        item: "dliassets:ruby_helmet" # Requires item definition
+        drop-chance: 0.02
+      chestplate:
+        item: "dliassets:ruby_chestplate"
+        drop-chance: 0.02
+      leggings:
+        item: "dliassets:ruby_leggings"
+        drop-chance: 0.02
+      boots:
+        item: "dliassets:ruby_boots"
+        drop-chance: 0.02
+
+    # AI Goals (Priority lower = higher priority)
+    # Paper Goal API allows modifying goals easily
+    ai:
+      # Remove default goals
+      remove:
+        - "minecraft:look_at_target"
+        - "minecraft:random_look_around"
+      # Add custom goals (requires Goal implementation in Kotlin/Java or ScriptEngine)
+      # Here we define configs for registered Goal Types
+      add:
+        - type: "melee_attack"
+          priority: 1
+          speed: 1.0
+          target-selector: "players_and_villagers"
+        - type: "move_towards_target"
+          priority: 2
+          speed: 1.2
+          within: 16.0
+        - type: "random_stroll"
+          priority: 7
+          speed: 0.8
+          chance: 0.1
+        - type: "look_at_player"
+          priority: 8
+          range: 10.0
+
+    # Loot Table (Merged/Overrides vanilla)
+    loot-table:
+      # Drop table ID (can be custom file in data/dliassets/loot_tables/entities/ruby_golem.json)
+      table: "dliassets:entities/ruby_golem"
+      # Or inline definition:
+      pools:
+        - rolls: 1
+          entries:
+            - type: "item"
+              name: "dliassets:ruby"
+              weight: 10
+              functions:
+                - type: "minecraft:set_count"
+                  count:
+                    min: 5
+                    max: 15
+                - type: "minecraft:looting_enchant"
+                  count:
+                    min: 0
+                    max: 3
+            - type: "item"
+              name: "dliassets:ruby_block"
+              weight: 1
+              functions:
+                - type: "minecraft:set_count"
+                  count: 1
+
+    # Spawn Conditions (For natural spawning via WorldGen or Spawners)
+    spawn:
+      enabled: false # Requires WorldGen config or external plugin (MythicMobs, etc.)
+      biomes:
+        - "minecraft:badlands"
+        - "minecraft:eroded_badlands"
+      conditions:
+        - type: "light_level"
+          max: 7
+        - type: "block_below"
+          blocks:
+            - "minecraft:red_sand"
+            - "minecraft:terracotta"
+      weight: 5
+      min-count: 1
+      max-count: 1
+
+  # ==========================
+  # PET / MINION: RUBY SPIRIT (Small, follows player)
+  # ==========================
+  ruby_spirit:
+    displayname: "<light_purple>Ruby Spirit</light_purple>"
+    base-entity: VEX # Small, flying, glowing
+    model:
+      custom-model-data: 2002
+      scale: 0.5
+      texture: "entity/dliassets/ruby_spirit.png"
+      glow-color: "#ff0000" # Team color / Glow effect
+    attributes:
+      max-health: 20.0
+      movement-speed: 0.4
+      attack-damage: 4.0
+    ai:
+      remove:
+        - "minecraft:charge_attack"
+      add:
+        - type: "follow_owner"
+          priority: 1
+          speed: 1.5
+          min-distance: 2.0
+          max-distance: 10.0
+        - type: "attack_owner_target"
+          priority: 2
+    # Tameable/Ownable logic handled via Listener + NBT/PersistentDataContainer
+    mechanics:
+      tameable: true
+      tame-item: "dliassets:ruby"
+      heal-items:
+        - "dliassets:ruby"
+        - "minecraft:redstone"
+
+  # ==========================
+  # DISPLAY ENTITIES (1.19.4+) - For Decoration / Holograms
+  # ==========================
+  ruby_hologram:
+    displayname: "<gold>Ruby Hologram</gold>"
+    base-entity: TEXT_DISPLAY
+    model: {} # Text displays use text content, not models
+    properties:
+      text: '<gradient:#ff0000:#ffff00>DLI Assets</gradient>\n<gray>Right-click to interact</gray>'
+      background-color: 0x80000000 # Semi-transparent black
+      line-width: 200
+      text-opacity: 255
+      alignment: "CENTER"
+      scale: 1.5
+      billboard: "CENTER" # Always face player
+    # Persistent, non-interactable by default
+    interactable: false
+    gravity: false
+    glowing: true
+
+  # ==========================
+  # ITEM DISPLAY (Custom 3D Item in world)
+  # ==========================
+  ruby_floating_gem:
+    displayname: "<red>Floating Ruby</red>"
+    base-entity: ITEM_DISPLAY
+    model:
+      custom-model-data: 2003
+    properties:
+      item-stack: "dliassets:ruby" # The item to display
+      rotation:
+        x: 0
+        y: 45 # Spin animation handled by mechanic/ticker
+        z: 0
+      scale: 1.5
+      glow: true
+      gravity: false
+    mechanics:
+      on_spawn:
+        - type: "animation"
+          loop: true
+          ticks: 100
+          properties:
+            - "rotation.y: 0->360"

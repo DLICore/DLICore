@@ -1,0 +1,154 @@
+# DLIAssets - Custom Recipes Configuration
+# Supports: shaped, shapeless, smithing, stonecutting, smelting, blasting, smoking, campfire
+
+recipes:
+  # ==========================
+  # SHAPED RECIPES (Crafting Table 3x3)
+  # ==========================
+  ruby_block:
+    type: "shaped"
+    group: "dliassets:ruby_blocks"
+    pattern:
+      - "R R"
+      - " R "
+      - "R R"
+    key:
+      R:
+        item: "dliassets:ruby"
+    result:
+      item: "dliassets:ruby_block"
+      count: 1
+
+  ruby_sword:
+    type: "shaped"
+    group: "dliassets:ruby_swords"
+    pattern:
+      - "R"
+      - "R"
+      - "S"
+    key:
+      R:
+        item: "dliassets:ruby"
+      S:
+        item: "minecraft:stick"
+    result:
+      item: "dliassets:ruby_sword"
+      count: 1
+
+  ruby_pickaxe:
+    type: "shaped"
+    pattern:
+      - "RRR"
+      - " S "
+      - " S "
+    key:
+      R:
+        item: "dliassets:ruby"
+      S:
+        item: "minecraft:stick"
+    result:
+      item: "dliassets:ruby_pickaxe"
+      count: 1
+
+  ruby_helmet:
+    type: "shaped"
+    pattern:
+      - "RRR"
+      - "R R"
+    key:
+      R:
+        item: "dliassets:ruby"
+    result:
+      item: "dliassets:ruby_helmet"
+      count: 1
+
+  ruby_chestplate:
+    type: "shaped"
+    pattern:
+      - "R R"
+      - "RRR"
+      - "RRR"
+    key:
+      R:
+        item: "dliassets:ruby"
+    result:
+      item: "dliassets:ruby_chestplate"
+      count: 1
+
+  # ==========================
+  # SHAPELESS RECIPES
+  # ==========================
+  ruby_from_block:
+    type: "shapeless"
+    ingredients:
+      - item: "dliassets:ruby_block"
+    result:
+      item: "dliassets:ruby"
+      count: 9
+
+  ruby_dust_combine:
+    type: "shapeless"
+    ingredients:
+      - item: "dliassets:ruby_dust"
+      - item: "dliassets:ruby_dust"
+      - item: "dliassets:ruby_dust"
+      - item: "dliassets:ruby_dust"
+    result:
+      item: "dliassets:ruby"
+      count: 1
+
+  # ==========================
+  # SMITHING RECIPES (1.21+ / Paper)
+  # ==========================
+  ruby_sword_upgrade:
+    type: "smithing"
+    template:
+      item: "minecraft:netherite_upgrade_smithing_template"
+    base:
+      item: "dliassets:ruby_sword"
+    addition:
+      item: "minecraft:netherite_ingot"
+    result:
+      item: "dliassets:netherite_ruby_sword"
+      count: 1
+
+  # ==========================
+  # STONECUTTING RECIPES
+  # ==========================
+  ruby_bricks_from_block:
+    type: "stonecutting"
+    ingredient:
+      item: "dliassets:ruby_block"
+    result:
+      item: "dliassets:ruby_bricks"
+      count: 4
+
+  ruby_slab_from_block:
+    type: "stonecutting"
+    ingredient:
+      item: "dliassets:ruby_block"
+    result:
+      item: "dliassets:ruby_slab"
+      count: 2
+
+  ruby_stairs_from_block:
+    type: "stonecutting"
+    ingredient:
+      item: "dliassets:ruby_block"
+    result:
+      item: "dliassets:ruby_stairs"
+      count: 1
+
+  ruby_wall_from_block:
+    type: "stonecutting"
+    ingredient:
+      item: "dliassets:ruby_block"
+    result:
+      item: "dliassets:ruby_wall"
+      count: 1
+
+  # ==========================
+  # FURNACE / BLASTING / SMOKING / CAMPFIRE
+  # ==========================
+  # Defined in furnace_recipes section of items.yml or separate smelting.yml
+  # These are handled by the FurnaceRecipeManager

@@ -1,0 +1,271 @@
+# DLIAssets - Blocks Configuration
+# Base materials: Use blocks with unused states or specific types
+# Recommended bases: NOTE_BLOCK, BARRIER, STRUCTURE_VOID, MUSHROOM_STEM, COMPOSTER, BELL, etc.
+
+blocks:
+  # ==========================
+  # STORAGE / BUILDING
+  # ==========================
+  ruby_block:
+    displayname: "<red>Ruby Block</red>"
+    material: NOTE_BLOCK
+    model:
+      custom-model-data: 1001
+      parent: "block/cube_all"
+      textures:
+        all: "blocks/ruby_block.png"
+    properties:
+      hardness: 5.0
+      resistance: 6.0
+      harvest-level: 2
+      harvest-tool: "pickaxe"
+      sound-group: "metal"
+      light-emission: 2
+
+  ruby_bricks:
+    displayname: "<red>Ruby Bricks</red>"
+    material: NOTE_BLOCK
+    model:
+      custom-model-data: 1002
+      parent: "block/cube_all"
+      textures:
+        all: "blocks/ruby_bricks.png"
+    properties:
+      hardness: 3.0
+      resistance: 6.0
+      harvest-level: 2
+      harvest-tool: "pickaxe"
+      sound-group: "stone"
+
+  # ==========================
+  # ORES
+  # ==========================
+  ruby_ore:
+    displayname: "<red>Ruby Ore</red>"
+    material: STONE
+    model:
+      custom-model-data: 1003
+      parent: "block/cube_all"
+      textures:
+        all: "blocks/ruby_ore.png"
+    properties:
+      hardness: 3.0
+      resistance: 3.0
+      harvest-level: 2
+      harvest-tool: "pickaxe"
+      sound-group: "stone"
+    drops:
+      - item: "dliassets:ruby"
+        min-count: 1
+        max-count: 3
+        conditions:
+          - type: "minecraft:match_tool"
+            predicate:
+              enchantments:
+                - enchantment: "minecraft:silk_touch"
+                  levels: { min: 1 }
+
+  deepslate_ruby_ore:
+    displayname: "<dark_red>Deepslate Ruby Ore</dark_red>"
+    material: DEEPSLATE
+    model:
+      custom-model-data: 1004
+      parent: "block/cube_all"
+      textures:
+        all: "blocks/deepslate_ruby_ore.png"
+    properties:
+      hardness: 4.5
+      resistance: 3.0
+      harvest-level: 2
+      harvest-tool: "pickaxe"
+      sound-group: "deepslate"
+    drops:
+      - item: "dliassets:ruby"
+        min-count: 1
+        max-count: 3
+
+  # ==========================
+  # DECORATION / FUNCTIONAL
+  # ==========================
+  ruby_lamp:
+    displayname: "<red>Ruby Lamp</red>"
+    material: REDSTONE_LAMP
+    model:
+      custom-model-data: 1005
+      parent: "block/cube_all"
+      textures:
+        on: "blocks/ruby_lamp_on.png"
+        off: "blocks/ruby_lamp_off.png"
+    properties:
+      hardness: 0.3
+      resistance: 0.3
+      harvest-tool: "pickaxe"
+      sound-group: "glass"
+      light-emission: 15
+    states:
+      lit:
+        type: "boolean"
+        values:
+          "true":
+            model:
+              textures:
+                all: "blocks/ruby_lamp_on.png"
+            light-emission: 15
+          "false":
+            model:
+              textures:
+                all: "blocks/ruby_lamp_off.png"
+            light-emission: 0
+
+  ruby_fence:
+    displayname: "<red>Ruby Fence</red>"
+    material: OAK_FENCE
+    model:
+      custom-model-data: 1006
+      parent: "block/fence_post"
+      textures:
+        texture: "blocks/ruby_block.png"
+    properties:
+      hardness: 2.0
+      resistance: 3.0
+      harvest-tool: "pickaxe"
+      sound-group: "metal"
+
+  # ==========================
+  # PLANTS / CROPS
+  # ==========================
+  ruby_crop:
+    displayname: "<red>Ruby Crop</red>"
+    material: WHEAT
+    model:
+      custom-model-data: 1007
+      parent: "block/crop"
+      textures:
+        crop: "blocks/ruby_crop_stage"
+    properties:
+      hardness: 0.0
+      resistance: 0.0
+      harvest-tool: "hoe"
+      sound-group: "crop"
+      collision-shape: "empty"
+      light-block: 1
+      random-ticks: true
+    drops:
+      - item: "dliassets:ruby"
+        min-count: 2
+        max-count: 4
+        conditions:
+          - type: "minecraft:block_state_property"
+            properties:
+              age: "7"
+
+  # ==========================
+  # BUILDING VARIANTS
+  # ==========================
+  ruby_slab:
+    displayname: "<red>Ruby Slab</red>"
+    material: STONE_SLAB
+    model:
+      custom-model-data: 1008
+      parent: "block/slab"
+      textures:
+        bottom: "blocks/ruby_block.png"
+        top: "blocks/ruby_block.png"
+        side: "blocks/ruby_block.png"
+    properties:
+      hardness: 5.0
+      resistance: 6.0
+      harvest-level: 2
+      harvest-tool: "pickaxe"
+      sound-group: "metal"
+
+  ruby_stairs:
+    displayname: "<red>Ruby Stairs</red>"
+    material: STONE_STAIRS
+    model:
+      custom-model-data: 1009
+      parent: "block/stairs"
+      textures:
+        bottom: "blocks/ruby_block.png"
+        top: "blocks/ruby_block.png"
+        side: "blocks/ruby_block.png"
+    properties:
+      hardness: 5.0
+      resistance: 6.0
+      harvest-level: 2
+      harvest-tool: "pickaxe"
+      sound-group: "metal"
+
+  ruby_wall:
+    displayname: "<red>Ruby Wall</red>"
+    material: COBBLESTONE_WALL
+    model:
+      custom-model-data: 1010
+      parent: "block/wall_post"
+      textures:
+        texture: "blocks/ruby_block.png"
+    properties:
+      hardness: 5.0
+      resistance: 6.0
+      harvest-level: 2
+      harvest-tool: "pickaxe"
+      sound-group: "metal"
+
+  # ==========================
+  # PRESSURE PLATE / BUTTON
+  # ==========================
+  ruby_pressure_plate:
+    displayname: "<red>Ruby Pressure Plate</red>"
+    material: STONE_PRESSURE_PLATE
+    model:
+      custom-model-data: 1011
+      parent: "block/pressure_plate_up"
+      textures:
+        texture: "blocks/ruby_block.png"
+    properties:
+      hardness: 0.5
+      resistance: 2.5
+      harvest-tool: "pickaxe"
+      sound-group: "metal"
+      redstone-conductive: true
+
+  ruby_button:
+    displayname: "<red>Ruby Button</red>"
+    material: STONE_BUTTON
+    model:
+      custom-model-data: 1012
+      parent: "block/button"
+      textures:
+        texture: "blocks/ruby_block.png"
+    properties:
+      hardness: 0.5
+      resistance: 2.5
+      harvest-tool: "pickaxe"
+      sound-group: "metal"
+      redstone-conductive: true
+
+# ==========================
+# BLOCK TAGS (For recipes, worldgen, etc.)
+# ==========================
+tags:
+  blocks:
+    "minecraft:mineable/pickaxe":
+      - "dliassets:ruby_block"
+      - "dliassets:ruby_bricks"
+      - "dliassets:ruby_ore"
+      - "dliassets:deepslate_ruby_ore"
+      - "dliassets:ruby_lamp"
+      - "dliassets:ruby_fence"
+      - "dliassets:ruby_slab"
+      - "dliassets:ruby_stairs"
+      - "dliassets:ruby_wall"
+      - "dliassets:ruby_pressure_plate"
+      - "dliassets:ruby_button"
+    "minecraft:needs_iron_tool":
+      - "dliassets:ruby_ore"
+      - "dliassets:deepslate_ruby_ore"
+    "dliassets:ruby_blocks":
+      - "dliassets:ruby_block"
+      - "dliassets:ruby_bricks"
+      - "dliassets:ruby_ore"
+      - "dliassets:deepslate_ruby_ore"

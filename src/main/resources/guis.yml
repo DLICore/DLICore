@@ -1,0 +1,339 @@
+# DLIAssets - GUI Configuration
+# Menu system for custom items, blocks, mobs, and admin tools
+
+guis:
+  # ==========================
+  # MAIN MENU
+  # ==========================
+  main_menu:
+    title: "<gradient:#ff0000:#ff8800>DLI Assets</gradient> <dark_gray>|</dark_gray> <white>Main Menu</white>"
+    size: 54
+    filler:
+      enabled: true
+      material: GRAY_STAINED_GLASS_PANE
+      name: " "
+      customModelData: 9001
+    items:
+      # Categories Row (10, 12, 14, 16)
+      10:
+        material: DIAMOND_SWORD
+        name: "<red>Custom Items</red>"
+        lore:
+          - "<gray>Weapons, tools, food, and special items."
+          - ""
+          - "<yellow>Click to browse!</yellow>"
+        action:
+          type: "open_gui"
+          gui: "items_category"
+      
+      12:
+        material: REDSTONE_BLOCK
+        name: "<gold>Custom Blocks</gold>"
+        lore:
+          - "<gray>Decorative blocks, ores, machines, furniture."
+          - ""
+          - "<yellow>Click to browse!</yellow>"
+        action:
+          type: "open_gui"
+          gui: "blocks_category"
+      
+      14:
+        material: ZOMBIE_HEAD
+        name: "<green>Custom Mobs</green>"
+        lore:
+          - "<gray>Bosses, pets, and unique creatures."
+          - ""
+          - "<yellow>Click to browse!</yellow>"
+        action:
+          type: "open_gui"
+          gui: "mobs_category"
+      
+      16:
+        material: NETHER_STAR
+        name: "<light_purple>Recipes & Crafting</light_purple>"
+        lore:
+          - "<gray>View all custom crafting recipes."
+          - ""
+          - "<yellow>Click to open!</yellow>"
+        action:
+          type: "open_gui"
+          gui: "recipes_main"
+      
+      # Utilities Row (28, 30, 32)
+      28:
+        material: WRITTEN_BOOK
+        name: "<aqua>Guide Book</aqua>"
+        lore:
+          - "<gray>Complete tutorial and documentation."
+          - ""
+          - "<yellow>Click to get your copy!</yellow>"
+        action:
+          type: "give_item"
+          item: "dliassets:guide_book"
+          close: true
+      
+      30:
+        material: COMMAND_BLOCK
+        name: "<yellow>Admin Panel</yellow>"
+        lore:
+          - "<gray>Server management tools."
+          - ""
+          - "<red>Requires: dliassets.admin</red>"
+        permission: "dliassets.admin"
+        action:
+          type: "open_gui"
+          gui: "admin_panel"
+      
+      32:
+        material: PLAYER_HEAD
+        name: "<white>Cosmetics & Pets</white>"
+        lore:
+          - "<gray>Manage your unlocked cosmetics."
+          - ""
+          - "<yellow>Click to open!</yellow>"
+        action:
+          type: "run_command"
+          command: "dlicosmetics"
+          close: true
+
+  # ==========================
+  # ITEMS CATEGORY (Paginated)
+  # ==========================
+  items_category:
+    title: "<red>Custom Items</red>"
+    size: 54
+    dynamic:
+      enabled: true
+      source: "items" # Reads from items.yml
+      filter: {}
+      template:
+        material: "{material}" # Auto-filled from item config
+        name: "{displayname}"
+        lore:
+          - "<gray>ID: <white>{id}</white></gray>"
+          - "<gray>Type: <white>{type}</white></gray>"
+          - ""
+          - "<yellow>Left-Click: <white>Give 1x</white></yellow>"
+          - "<yellow>Right-Click: <white>Give Stack</white></yellow>"
+          - "<yellow>Shift-Click: <white>View Recipe</white></yellow>"
+      actions:
+        left_click:
+          type: "give_item"
+          item: "{id}"
+          amount: 1
+          close: false
+        right_click:
+          type: "give_item"
+          item: "{id}"
+          amount: 64
+          close: false
+        shift_left_click:
+          type: "open_gui"
+          gui: "recipe_viewer"
+          context:
+            recipe_id: "{id}"
+
+    items:
+      45: # Previous Page
+        material: ARROW
+        name: "<gray>Previous Page"
+        action:
+          type: "pagination"
+          direction: "prev"
+      53: # Next Page
+        material: ARROW
+        name: "<gray>Next Page"
+        action:
+          type: "pagination"
+          direction: "next"
+      49: # Back
+        material: BARRIER
+        name: "<red>Back to Main Menu"
+        action:
+          type: "open_gui"
+          gui: "main_menu"
+
+  # ==========================
+  # BLOCKS CATEGORY
+  # ==========================
+  blocks_category:
+    title: "<gold>Custom Blocks</gold>"
+    size: 54
+    dynamic:
+      enabled: true
+      source: "blocks"
+      template:
+        material: "{material}"
+        name: "{displayname}"
+        lore:
+          - "<gray>ID: <white>{id}</white></gray>"
+          - "<gray>Hardness: <white>{hardness}</white></gray>"
+          - ""
+          - "<yellow>Click to give!</yellow>"
+      actions:
+        left_click:
+          type: "give_item"
+          item: "{id}"
+          amount: 64
+          close: false
+    items:
+      45:
+        material: ARROW
+        name: "<gray>Previous Page"
+        action:
+          type: "pagination"
+          direction: "prev"
+      53:
+        material: ARROW
+        name: "<gray>Next Page"
+        action:
+          type: "pagination"
+          direction: "next"
+      49:
+        material: BARRIER
+        name: "<red>Back"
+        action:
+          type: "open_gui"
+          gui: "main_menu"
+
+  # ==========================
+  # MOBS CATEGORY
+  # ==========================
+  mobs_category:
+    title: "<green>Custom Mobs</green>"
+    size: 54
+    dynamic:
+      enabled: true
+      source: "mobs"
+      template:
+        material: "minecraft:{entity_type}_spawn_egg" # Attempts to use spawn egg
+        name: "{displayname}"
+        lore:
+          - "<gray>ID: <white>{id}</white></gray>"
+          - "<gray>Health: <red>{health}</red></gray>"
+          - "<gray>Damage: <red>{damage}</red></gray>"
+          - ""
+          - "<yellow>Left-Click: <white>Spawn</white></yellow>"
+          - "<yellow>Right-Click: <white>Give Spawn Egg</white></yellow>"
+      actions:
+        left_click:
+          type: "run_command"
+          command: "dliassets spawn {id}"
+          close: false
+        right_click:
+          type: "give_item"
+          item: "{id}_spawn_egg"
+          amount: 1
+          close: false
+    items:
+      49:
+        material: BARRIER
+        name: "<red>Back"
+        action:
+          type: "open_gui"
+          gui: "main_menu"
+
+  # ==========================
+  # RECIPES VIEWER
+  # ==========================
+  recipes_main:
+    title: "<light_purple>Crafting Recipes</light_purple>"
+    size: 54
+    dynamic:
+      enabled: true
+      source: "recipes"
+      template:
+        material: "{result_item}"
+        name: "<yellow>{result_name}</yellow>"
+        lore:
+          - "<gray>Recipe ID: <white>{id}</white></gray>"
+          - "<gray>Type: <white>{type}</white></gray>"
+          - ""
+          - "<yellow>Click to view recipe!</yellow>"
+      actions:
+        left_click:
+          type: "open_gui"
+          gui: "recipe_detail"
+          context:
+            recipe_id: "{id}"
+    items:
+      49:
+        material: BARRIER
+        name: "<red>Back"
+        action:
+          type: "open_gui"
+          gui: "main_menu"
+
+  recipe_detail:
+    title: "<yellow>Recipe: {recipe_name}</yellow>"
+    size: 27
+    items:
+      # Crafting grid (slots 0-8) - Filled dynamically by code
+      13: # Result slot
+        material: AIR
+        name: " "
+      22: # Back
+        material: BARRIER
+        name: "<red>Back to Recipes"
+        action:
+          type: "open_gui"
+          gui: "recipes_main"
+
+  # ==========================
+  # ADMIN PANEL
+  # ==========================
+  admin_panel:
+    title: "<dark_red>Admin Panel</dark_red>"
+    size: 27
+    items:
+      10:
+        material: FEATHER
+        name: "<yellow>Reload Configs</yellow>"
+        lore:
+          - "<gray>Reloads items, blocks, mobs, GUIs,"
+          - "<gray>packs, and messages from disk."
+        permission: "dliassets.admin.reload"
+        action:
+          type: "run_command"
+          command: "dliassets reload"
+          close: true
+      
+      12:
+        material: COMPASS
+        name: "<yellow>Regenerate Resource Pack</yellow>"
+        lore:
+          - "<gray>Forces full resource pack regeneration"
+          - "<gray>and updates all online players."
+        permission: "dliassets.admin.pack"
+        action:
+          type: "run_command"
+          command: "dliassets pack regenerate"
+          close: true
+      
+      14:
+        material: DIAMOND
+        name: "<aqua>Give All Test Items</aqua>"
+        lore:
+          - "<gray>Gives you one of every custom item/block."
+        permission: "dliassets.admin.give"
+        action:
+          type: "run_command"
+          command: "dliassets giveall"
+          close: true
+      
+      16:
+        material: SPAWNER
+        name: "<red>Spawn Test Mob</red>"
+        lore:
+          - "<gray>Spawns a Ruby Golem at your location."
+        permission: "dliassets.admin.spawn"
+        action:
+          type: "run_command"
+          command: "dliassets spawn ruby_golem"
+          close: true
+      
+      22:
+        material: BARRIER
+        name: "<red>Close</red>"
+        action:
+          type: "close"

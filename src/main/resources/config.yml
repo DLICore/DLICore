@@ -1,0 +1,67 @@
+# DLIAssets Main Configuration
+# Version: 1.0
+
+# General Settings
+general:
+  # Plugin namespace (used for namespaced keys)
+  namespace: "dliassets"
+  
+  # Check for updates on startup
+  check-updates: true
+  
+  # Debug mode (verbose logging)
+  debug: false
+
+# Resource Pack Settings
+resource-pack:
+  # Auto-generate resource pack on startup/reload
+  auto-generate: true
+  
+  # Host the pack on the server (requires Paper 1.20.5+)
+  # If false, you must host the generated zip yourself and set 'host-url'
+  host-on-server: true
+  
+  # If host-on-server is false, set your external URL here (e.g., "https://cdn.example.com/dliassets.zip")
+  host-url: ""
+  
+  # Pack format version (auto-detected from server version usually)
+  # 1.20.4-1.20.6 -> 15, 1.21 -> 34
+  pack-format: 0 
+  
+  # Pack description shown to players
+  description: "DLIAssets Custom Content Pack"
+  
+  # Compression level (0-9)
+  compression-level: 6
+
+# Model Engine Integration (Optional)
+model-engine:
+  enabled: false
+  # If true, DLIAssets will register models via ModelEngine API instead of native resource pack
+  use-for-models: false
+
+# Custom Item/Block Settings
+assets:
+  # Default model data range start (CustomModelData)
+  # Oraxen/DLIAssets assigns unique IDs automatically.
+  # Keep high to avoid conflicts with other plugins (e.g., 1000000)
+  custom-model-data-start: 1000000
+  
+  # Allow unregistered items to be handled (prevents errors on unknown items)
+  safe-mode: true
+  
+  # NBT Tag used to identify custom items
+  nbt-tag: "dli_id"
+
+# Command Settings
+commands:
+  # Cooldown for /dligive in seconds
+  give-cooldown: 2
+  
+  # Max amount per /dligive command
+  give-max-amount: 64
+
+# World Generation (Custom Biomes/Dimensions)
+world-gen:
+  enabled: false
+  # Custom dimension files go in /dimensions folder

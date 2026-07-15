@@ -1,0 +1,145 @@
+# DLIAssets Items Configuration
+# Format similar to Oraxen/ItemsAdder
+# Namespace is defined in config.yml (default: dliassets)
+# Full ID becomes: namespace:id (e.g., dliassets:ruby)
+
+items:
+  # ==========================
+  # MATERIALS / GEMS
+  # ==========================
+  ruby:
+    displayname: "<gradient:#ff0000:#aa0000>Ruby</gradient>"
+    material: DIAMOND
+    model:
+      # Custom Model Data will be auto-assigned if not specified
+      # custom_model_data: 1000001
+      # Parent model (optional, for custom geometry)
+      # parent: "item/generated"
+      # Textures referenced in pack.yml or auto-detected from textures folder
+      textures:
+        - "items/ruby.png"
+    # Lore supports MiniMessage format
+    lore:
+      - "<gray>A precious red gemstone."
+      - "<dark_gray>Used for crafting magical tools."
+    # Enchantment glint without enchants
+    glint: false
+    # Max stack size (default 64)
+    max-stack-size: 64
+    # Unbreakable tag
+    unbreakable: false
+    # Custom NBT data (merged into item)
+    nbt: {}
+    # Permissions required to give/use (optional)
+    # permission: "dliassets.item.ruby"
+
+  sapphire:
+    displayname: "<gradient:#0066ff:#00aaff>Sapphire</gradient>"
+    material: DIAMOND
+    model:
+      textures:
+        - "items/sapphire.png"
+    lore:
+      - "<gray>A deep blue gemstone."
+      - "<dark_gray>Essential for enchanting."
+    glint: true # Shows enchantment glint
+
+  # ==========================
+  # TOOLS / WEAPONS
+  # ==========================
+  ruby_sword:
+    displayname: "<red>Ruby Sword</red>"
+    material: DIAMOND_SWORD
+    model:
+      textures:
+        - "items/ruby_sword.png"
+    lore:
+      - "<gray>Forged from pure ruby."
+      - "<red>Damage: 8</red>"
+    # Attributes modifiers (1.20.4+ format)
+    attributes:
+      - attribute: "generic.attack_damage"
+        operation: "ADD_VALUE"
+        amount: 8.0
+        slot: "MAINHAND"
+      - attribute: "generic.attack_speed"
+        operation: "ADD_VALUE"
+        amount: -2.4
+        slot: "MAINHAND"
+    unbreakable: true
+    # Custom mechanics can be handled via listeners (right-click, hit entity, etc.)
+    mechanics:
+      on_hit:
+        - type: "particle"
+          particle: "redstone"
+          color: "#ff0000"
+          count: 10
+        - type: "sound"
+          sound: "entity.player.attack.strong"
+          pitch: 1.2
+
+  # ==========================
+  # FOOD / CONSUMABLES
+  # ==========================
+  ruby_apple:
+    displayname: "<gold>Ruby Apple</gold>"
+    material: ENCHANTED_GOLDEN_APPLE
+    model:
+      textures:
+        - "items/ruby_apple.png"
+    lore:
+      - "<gray>An apple infused with ruby dust."
+    food:
+      nutrition: 6
+      saturation: 12.0
+      can-always-eat: true
+      eat-seconds: 3.0
+    effects:
+      - type: "REGENERATION"
+        duration: 200 # ticks (10 seconds)
+        amplifier: 1 # Level 2
+      - type: "FIRE_RESISTANCE"
+        duration: 600
+        amplifier: 0
+    mechanics:
+      on_consume:
+        - type: "particle"
+          particle: "totem_of_undying"
+          count: 30
+
+# ==========================
+# RECIPES (Optional, can be in separate recipes.yml)
+# ==========================
+recipes:
+  ruby:
+    type: "shaped"
+    pattern:
+      - "R R"
+      - " R "
+      - "R R"
+    ingredients:
+      R: "dliassets:ruby"
+    result: "dliassets:ruby_block"
+    # Override result amount
+    result-amount: 1
+
+  ruby_sword:
+    type: "shaped"
+    pattern:
+      - "R"
+      - "R"
+      - "S"
+    ingredients:
+      R: "dliassets:ruby"
+      S: "minecraft:stick"
+    result: "dliassets:ruby_sword"
+
+# ==========================
+# FURNACE / BLASTING / SMOKING RECIPES
+# ==========================
+furnace_recipes:
+  ruby_ore_to_gem:
+    input: "dliassets:ruby_ore" # Requires custom block
+    output: "dliassets:ruby"
+    experience: 1.0
+    cooking-time: 200

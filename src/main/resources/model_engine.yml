@@ -1,0 +1,66 @@
+# DLIAssets - Model Engine Integration
+# Requires ModelEngine plugin (https://github.com/MythicCraft/ModelEngine)
+# Enable this to use 3D models (.geo.json, .anim.json) for entities, items, blocks
+
+model-engine:
+  # Master toggle
+  enabled: false
+  
+  # Use ModelEngine models instead of native resource pack models
+  use-for-items: false
+  use-for-blocks: false
+  use-for-entities: true  # Highly recommended for custom mobs
+  
+  # ModelEngine API Key (if your server requires it)
+  api-key: ""
+  
+  # Remote asset pack URL (zip containing models/textures/animations)
+  # DLIAssets can auto-download and install on startup
+  asset-url: ""
+  
+  # Local cache directory for downloaded ModelEngine packs
+  cache-dir: "modelengine_cache"
+  
+  # Auto-update check interval (minutes, 0 = disabled)
+  auto-update-interval: 60
+  
+  # Entity Model Mapping
+  # Maps DLIAssets mob IDs to ModelEngine model IDs
+  entity-model-map:
+    # "ruby_golem": "modelengine:ruby_golem"
+    # "ruby_spirit": "modelengine:ruby_spirit"
+  
+  # Item Model Mapping
+  # Maps DLIAssets item IDs to ModelEngine item model IDs
+  item-model-map:
+    # "ruby_sword": "modelengine:ruby_sword"
+    # "ruby_pickaxe": "modelengine:ruby_pickaxe"
+  
+  # Block Model Mapping (Experimental)
+  # Maps DLIAssets block IDs to ModelEngine block model IDs
+  block-model-map:
+    # "ruby_lamp": "modelengine:ruby_lamp"
+  
+  # Animation Controller
+  # Default animations for entity states
+  default-animations:
+    idle: "animation.ruby_golem.idle"
+    walk: "animation.ruby_golem.walk"
+    attack: "animation.ruby_golem.attack"
+    hurt: "animation.ruby_golem.hurt"
+    death: "animation.ruby_golem.death"
+  
+  # Particle Effects via ModelEngine
+  particle-effects:
+    enabled: true
+    # Map mechanic types to ME particles
+    mechanic-map:
+      "ruby_aura": "modelengine:ruby_aura_particle"
+      "ruby_hit": "modelengine:ruby_hit_particle"
+  
+  # Model Engine Version Compatibility
+  # "latest", "1.20.4", "1.20.6", "1.21"
+  target-version: "latest"
+  
+  # Debug logging for ModelEngine integration
+  debug: false

@@ -1,0 +1,43 @@
+name: DLIAssets
+version: ${project.version}
+main: com.dli.assets.DLIAssets
+api-version: "1.20"
+authors: [DEMİR]
+description: Oraxen-style custom assets plugin for modern Minecraft
+website: https://github.com/DEMIR/DLIAssets
+load: STARTUP
+commands:
+  dliassets:
+    description: Main command for DLIAssets
+    usage: /dliassets <reload|give|pack|list|info|spawn|gui|debug>
+    permission: dliassets.admin
+    aliases: [dli, assets]
+  dligive:
+    description: Give custom items/blocks
+    usage: /dligive <player> <namespace:id> [amount]
+    permission: dliassets.give
+permissions:
+  dliassets.admin:
+    description: Admin access to DLIAssets commands
+    default: op
+    children:
+      dliassets.reload: true
+      dliassets.give: true
+      dliassets.pack: true
+      dliassets.spawn: true
+      dliassets.debug: true
+  dliassets.reload:
+    description: Reload all configurations
+    default: op
+  dliassets.give:
+    description: Permission to give custom items
+    default: op
+  dliassets.pack:
+    description: Permission to manage resource packs
+    default: true
+  dliassets.spawn:
+    description: Permission to spawn custom mobs
+    default: op
+  dliassets.debug:
+    description: Permission to access debug commands
+    default: op
